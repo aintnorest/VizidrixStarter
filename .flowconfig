@@ -1,0 +1,14 @@
+[ignore]
+.*/build
+.*/dist
+.*/node_modules/webpack/.*
+.*/node_modules/webpack-dev-server/.*
+
+[include]
+
+[libs]
+def/
+
+[options]
+suppress_type=$FlowIssue
+suppress_comment= \\(.\\|\n\\)*\\$FlowIssue
