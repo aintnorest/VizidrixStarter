@@ -89,6 +89,7 @@ const webpackConfig = {
 // NOTE: this is a temporary workaround. I don't know how to get Karma
 // to include the vendor bundle that webpack creates, so to get around that
 // we remove the bundle splitting when webpack is used with Karma.
+// NOTE: Not using karma anymore but without this is complains of two versions of babel polyfill
 const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin(
   'vendor', '[name].js'
 );

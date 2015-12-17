@@ -1,7 +1,7 @@
 /* @flow */
 
 // $FlowIssue
-import "styles/Main.css";
+import "./styles/Main.css";
 import { render } from 'react-dom';
 import React      from 'react';
 
@@ -12,4 +12,4 @@ function foo(x: string, y: number): number {
 
 
 
-console.log("Loading",foo("Loading",2));
+console.log("Loading and trying out flow",foo("Loading",3));

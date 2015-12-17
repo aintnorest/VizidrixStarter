@@ -3,6 +3,7 @@
 .*/dist
 .*/node_modules/webpack/.*
 .*/node_modules/webpack-dev-server/.*
+.*/tests
 
 [include]
 
