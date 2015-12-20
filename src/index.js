@@ -2,14 +2,19 @@
 
 // $FlowIssue
 import "./styles/Main.css";
-import { render } from 'react-dom';
-import React      from 'react';
+import { render }     from 'react-dom';
+import React          from 'react';
+import configureStore from 'store/configureStore';
+import Navigator      from 'components/Navigator/Navigator';
 
 
-function foo(x: string, y: number): number {
-  return x.length * y;
+const store  = configureStore(__DEBUG__);
+function handleUpdate() {
+    let nS = store.getState();
+    let props = nS.navigator;
+    render(
+        React.createElement(Navigator, Object.assign({},props, { store: store })),
+        document.getElementById('root')
+    );
 }
-
-
-
-console.log("Loading and trying out flow",foo("Loading",3));
+store.subscribe(handleUpdate);

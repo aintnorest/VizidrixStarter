@@ -74,6 +74,8 @@ config.set('utils_aliases', [
   'actions',
   'assets',
   'components',
+  'pureComponents',
+  'thirdPartyComponents',
   'commandHandlers',
   'constants',
   'reducers',

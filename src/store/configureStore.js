@@ -1,8 +1,24 @@
 /* @flow */
 import { applyMiddleware, compose, createStore } from 'redux';
-//import rootReducer  from 'reducers';
+import { Map } from 'immutable';
+import rootReducer  from 'reducers/rootReducer';
 import thunk        from 'redux-thunk';
+import DevTools     from 'thirdPartyComponents/LogMonitor';
 
-export default function configureStore() {
+export default function configureStore(debug: boolean = false) {
+    let createStoreWithMiddleware;
 
+    const middleware = applyMiddleware(thunk);
+
+    if (debug) {
+      createStoreWithMiddleware = compose(middleware, DevTools.instrument());
+    } else {
+      createStoreWithMiddleware = compose(middleware);
+    }
+
+    const store = createStoreWithMiddleware(createStore)(
+      rootReducer
+    );
+
+    return store;
 }
