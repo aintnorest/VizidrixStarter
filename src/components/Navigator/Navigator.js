@@ -3,6 +3,7 @@ import { TransitionMotion } from 'react-motion';
 import React                from 'react';
 //DEBUG
 let Provider, LogMonitor, debugStyles;
+//GLOBAL __DEBUG__
 if(__DEBUG__) {
     const reactRedux = require("react-redux");
     debugStyles = {position:"absolute",top:"0",right:"0",zIndex:"10",width:"40vw",height:"100vh"};
@@ -13,28 +14,29 @@ if(__DEBUG__) {
 export function getStyles(props: Object): Object {
     let configs = {};
     if(typeof(props.current) == "undefined"){
-        console.warn('Invalid sceneConfigurations');
+        console.warn('Invalid sceneConfigurations.default');
         return configs;
     }
-    Object.keys(props.currents).forEach((key: string) => {
-        if (typeof(props.sceneConfigurations) == "undefined") {
-            console.warn('Invalid sceneConfigurations');
+    Object.keys(props.current).forEach((key: string) => {
+        if (typeof(props.sceneConfigurations.default) == "undefined") {
+            console.warn('Invalid sceneConfigurations.default');
             return configs;
         }
-        configs[key] = props.sceneConfigurations[key].Styles(props.current[key]);
+        console.log("key",key,props.sceneConfigurations.default);
+        configs[key] = props.sceneConfigurations.default[key].Styles(props.current[key]);
     });
     return configs;
 }
 
 export function willEnter(props: Object): Function {
     return (key: string): Object => {
-        return props.sceneConfigurations[key].Enter;
+        return props.sceneConfigurations.default[key].Enter;
     };
 }
 
 export function willLeave(props: Object): Function {
     return (key: string): Object => {
-        return props.sceneConfigurations[key].Leave;
+        return props.sceneConfigurations.default[key].Leave;
     };
 }
 //
@@ -47,7 +49,7 @@ export function sceneObj(iS: Object, props: Object, wrapper: Object) : Function 
             WebkitTransform: trns,
             transform: trns
         };
-        return React.cloneElement(wrapper,{style:s,key:key},props.sceneConfigurations[key].VM(props.store.getState()));
+        return React.cloneElement(wrapper,{style:s,key:key},props.sceneConfigurations.default[key].VM(props.store.getState()));
     };
 };
 //
@@ -66,6 +68,7 @@ export function interpolatedStyles(iS: Object, props: Object,  wrapper: Object) 
 export default function Navigator(): Function {
     let wrapper = (<div />);
     return (props: Object) => {
+        console.log("NAv Props: ",props);
         return (
             <TransitionMotion styles={getStyles(props)}
                 willEnter={willEnter(props)}

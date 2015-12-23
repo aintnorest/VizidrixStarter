@@ -11,3 +11,19 @@ body {
     padding: 0px;
     overflow: hidden;
 }
+.VZ_Backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: blue;
+}
+.VZ_CardFrame {
+    position: absolute;
+    top: 10vh;
+    left: 10vh;
+    width: 300px;
+    height: 600px;
+    background-color: yellow;
+}
